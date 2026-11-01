@@ -105,47 +105,67 @@ footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
 </div>
 
 <script>
+
 function generate(){
- const phone=document.getElementById("phone").value.trim();
- if(!phone){
-  alert("Please enter your mobile model!");
+ const phone = document.getElementById("phone").value.trim();
+ const ram = Number(document.getElementById("ram").value);
+ const hz = Number(document.getElementById("refresh").value);
+ const gyro = document.getElementById("gyro").value;
+ const fingers = Number(document.getElementById("fingers").value);
+ const style = document.getElementById("style").value;
+
+ // Phone name validation
+ const brands = [
+  "poco","redmi","xiaomi","samsung","vivo",
+  "oppo","realme","oneplus","iqoo","motorola",
+  "infinix","tecno","apple","iphone","google pixel"
+ ];
+
+ const lower = phone.toLowerCase();
+ const validBrand = brands.some(b => lower.includes(b));
+ const hasModelNumber = /\d/.test(phone);
+
+ if(!validBrand || !hasModelNumber){
+  alert("Please enter a valid phone brand and model number. Example: POCO M7 5G");
   return;
  }
 
- const ram=Number(document.getElementById("ram").value);
- const hz=Number(document.getElementById("refresh").value);
- const gyro=document.getElementById("gyro").value;
- const fingers=Number(document.getElementById("fingers").value);
- const style=document.getElementById("style").value;
+ // Starting sensitivity calculation
+ let base = 165;
 
- let base=170;
- if(hz>=120) base+=8;
- else if(hz>=90) base+=4;
- if(ram>=8) base+=3;
- if(fingers>=4) base+=3;
- if(gyro==="on") base-=5;
+ if(hz === 90) base += 5;
+ if(hz >= 120) base += 10;
 
- if(style==="headshot") base+=10;
- if(style==="rush") base+=5;
+ if(ram >= 6) base += 3;
+ if(ram >= 8) base += 3;
+ if(ram >= 12) base += 2;
+
+ if(fingers === 3) base += 3;
+ if(fingers === 4) base += 6;
+
+ if(gyro === "on") base -= 8;
+
+ if(style === "headshot") base += 12;
+ if(style === "rush") base += 6;
 
  function limit(n){
-  return Math.max(0,Math.min(200,n));
+  return Math.max(0,Math.min(200,Math.round(n)));
  }
 
- const settings=[
+ const settings = [
   ["General",limit(base)],
-  ["Red Dot",limit(base-5)],
-  ["2X Scope",limit(base-15)],
-  ["4X Scope",limit(base-30)],
-  ["Sniper Scope",limit(base-65)],
-  ["Free Look",limit(base-10)]
+  ["Red Dot",limit(base-8)],
+  ["2X Scope",limit(base-20)],
+  ["4X Scope",limit(base-38)],
+  ["Sniper Scope",limit(base-70)],
+  ["Free Look",limit(base-15)]
  ];
 
- document.getElementById("device").textContent=
+ document.getElementById("device").textContent =
   "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz";
 
- document.getElementById("values").innerHTML=
-  settings.map(([name,value])=>
+ document.getElementById("values").innerHTML =
+  settings.map(([name,value]) =>
    `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
   ).join("");
 
@@ -153,15 +173,16 @@ function generate(){
 }
 
 function copyResult(){
- const text=document.getElementById("device").textContent+
+ const text = document.getElementById("device").textContent+
  "\n"+Array.from(document.querySelectorAll("#values .value"))
  .map(x=>x.innerText).join("\n");
+
  if(navigator.clipboard && window.isSecureContext){
   navigator.clipboard.writeText(text)
    .then(()=>alert("Sensitivity Copied!"))
-   .catch(()=>alert("Please select and copy the result."));
+   .catch(()=>alert("Copy failed. Please copy manually."));
  }else{
-  alert("Please select and copy the result manually.");
+  alert("Copy not supported. Please copy manually.");
  }
 }
 </script>
