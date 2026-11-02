@@ -268,7 +268,6 @@ async function checkAndroidPhone(phone){
 async function generate(){
 
  const phone=document.getElementById("phone").value.trim();
- const matchedPhone = await checkAndroidPhone(phone);
 
 if(!matchedPhone){
  alert("Phone Not Found! Please enter a valid Android phone model.");
