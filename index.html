@@ -232,7 +232,14 @@ footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
 
  <button onclick="generate()">GENERATE SENSITIVITY</button>
 </div>
-
+<div id="loading" style="display:none;text-align:center;padding:25px;background:#151629;border:1px solid #8b5cf6;border-radius:15px;margin:15px 0;">
+  <div style="font-size:35px;">🎮</div>
+  <h3 style="color:#c4b5fd;">GSP AI IS WORKING...</h3>
+  <div style="background:#333;border-radius:20px;height:12px;overflow:hidden;">
+    <div id="progressBar" style="width:0%;height:100%;background:linear-gradient(90deg,#7439df,#00eaff);transition:width .1s;"></div>
+  </div>
+  <p id="progressText" style="color:#00eaff;">0%</p>
+</div>
 <div class="card result" id="result">
  <h2>🔥 Your Sensitivity</h2>
  <p id="device"></p>
@@ -302,7 +309,7 @@ footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
   
 <script>
 
-function generate(){
+async function generate(){
 
  const phone=document.getElementById("phone").value.trim();
 
@@ -434,7 +441,21 @@ const supportedPhones = [
   alert("Phone Not Found! Please enter a supported mobile model.");
   return;
  }
+const loading = document.getElementById("loading");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
 
+loading.style.display = "block";
+progressBar.style.width = "0%";
+
+for (let progress = 0; progress <= 100; progress += 5) {
+  progressBar.style.width = progress + "%";
+  progressText.textContent = progress + "%";
+
+  await new Promise(resolve => setTimeout(resolve, 60));
+}
+
+loading.style.display = "none";
  const ram=Number(document.getElementById("ram").value);
  const hz=Number(document.getElementById("refresh").value);
  const gyro=document.getElementById("gyro").value;
