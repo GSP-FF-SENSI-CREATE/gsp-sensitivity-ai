@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,58 +7,271 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
- margin:0;background:#080914;color:white;
- font-family:Arial,sans-serif;padding:18px;
+ margin:0;
+ padding:16px;
+ background:#080914;
+ color:white;
+ font-family:Arial,sans-serif;
+ transition:.3s;
 }
+
 header{text-align:center;padding:22px 0}
-.logo{font-size:27px;font-weight:900;color:#a78bfa}
+.logo{font-size:28px;font-weight:900;color:#a78bfa}
 .sub{color:#aaa;font-size:12px;letter-spacing:2px}
+
 .card{
- background:#151629;border:1px solid #34334f;
- border-radius:16px;padding:18px;margin:15px 0;
+ background:#151629;
+ border:1px solid #34334f;
+ border-radius:16px;
+ padding:18px;
+ margin:16px 0;
 }
+
 h2{color:#c4b5fd;font-size:19px}
-label{display:block;margin-top:15px;color:#ddd}
+
+label{
+ display:block;
+ margin-top:15px;
+ color:#ddd;
+}
+
 input,select,textarea{
- width:100%;padding:13px;margin-top:7px;
- border:1px solid #45435f;border-radius:9px;
- background:#25253a;color:white;font-size:15px;
+ width:100%;
+ padding:13px;
+ margin-top:7px;
+ border:1px solid #45435f;
+ border-radius:9px;
+ background:#25253a;
+ color:white;
+ font-size:15px;
 }
+
 textarea{resize:vertical;min-height:75px}
+
 button{
- width:100%;padding:15px;margin-top:18px;
- border:0;border-radius:10px;
+ width:100%;
+ padding:15px;
+ margin-top:18px;
+ border:0;
+ border-radius:10px;
  background:linear-gradient(90deg,#7439df,#a855f7);
- color:white;font-weight:bold;font-size:16px;
+ color:white;
+ font-weight:bold;
+ font-size:16px;
+ cursor:pointer;
 }
-.secondary{background:#292943;border:1px solid #6653a5}
+
+.secondary{
+ background:#292943;
+ border:1px solid #6653a5;
+}
+
 .result{display:none}
+
 .value{
- display:flex;justify-content:space-between;
- padding:12px;border-bottom:1px solid #34334f;
+ display:flex;
+ justify-content:space-between;
+ padding:12px;
+ border-bottom:1px solid #34334f;
 }
+
 .value strong{color:#c4b5fd}
-.profile{
- display:none;text-align:center;
- background:linear-gradient(145deg,#25204a,#101323);
- border:1px solid #8b5cf6;border-radius:18px;
- padding:22px;margin-top:20px;
+
+#loading{
+ display:none;
+ margin-top:20px;
+ text-align:center;
 }
+
+.progress-bg{
+ height:12px;
+ background:#292943;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:12px;
+}
+
+#progressBar{
+ height:100%;
+ width:0%;
+ background:linear-gradient(90deg,#7439df,#c084fc);
+ transition:width .1s;
+}
+
+.profile{
+ display:none;
+ text-align:center;
+ background:linear-gradient(145deg,#25204a,#101323);
+ border:1px solid #8b5cf6;
+ border-radius:18px;
+ padding:22px;
+ margin-top:20px;
+}
+
 .avatar{
- width:100px;height:100px;border-radius:50%;
- border:3px solid #a78bfa;object-fit:cover;
+ width:100px;
+ height:100px;
+ border-radius:50%;
+ border:3px solid #a78bfa;
+ object-fit:cover;
  background:#25253a;
 }
-.pname{font-size:23px;color:#c4b5fd;font-weight:bold;margin-top:12px}
+
+.pname{
+ font-size:23px;
+ color:#c4b5fd;
+ font-weight:bold;
+ margin-top:12px;
+}
+
 .uid{color:#aaa;font-size:13px;margin-top:8px}
 .bio{color:#eee;margin:15px 0;overflow-wrap:anywhere}
 .tag{color:#a78bfa;font-size:12px;letter-spacing:2px}
-footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
+
+footer{
+ text-align:center;
+ color:#888;
+ font-size:11px;
+ margin:25px 0;
+}
+
+.pro-mode{
+ background:#050505;
+}
+
+.pro-mode .card{
+ background:#111;
+ border:1px solid #ffb000;
+ box-shadow:0 0 15px #ff990033;
+}
+
+.pro-mode h2,
+.pro-mode .logo,
+.pro-mode .value strong{
+ color:#ffbd35;
+}
+
+.pro-mode button{
+ background:linear-gradient(90deg,#a65b00,#ffbd35);
+ color:#160d00;
+}
+
+.pro-mode .profile{
+ border-color:#ffbd35;
+}
+
+a{color:#c4b5fd;text-decoration:none}
+a:hover{text-decoration:underline}
 </style>
 </head>
 
 <body>
+
+<header>
+ <div class="logo">🔥 GSP SENSITIVITY AI</div>
+ <div class="sub">SMART GAMING SENSITIVITY GENERATOR</div>
+</header>
+
+<div style="text-align:center;margin:15px 0">
+ <button id="proBtn" onclick="toggleProMode()">
+ 🔥 ACTIVATE PRO MODE
+ </button>
+</div>
+
+<!-- SENSITIVITY GENERATOR -->
+
+<div class="card">
+ <h2>🎯 GENERATE SENSITIVITY</h2>
+ <p style="color:#aaa;font-size:13px">
+ Enter your phone details to get starting sensitivity suggestions.
+ </p>
+
+ <label>Mobile Model</label>
+ <input id="phone" list="phoneList" placeholder="Example: POCO M7 5G">
+
+ <datalist id="phoneList">
+  <option value="POCO M7 5G">
+  <option value="POCO X7 PRO 5G">
+  <option value="POCO F6">
+  <option value="Redmi Note 14 5G">
+  <option value="Samsung Galaxy A15 5G">
+  <option value="Realme Narzo 70 5G">
+  <option value="OPPO A3x 5G">
+  <option value="Vivo T3 5G">
+  <option value="iQOO Z9 5G">
+  <option value="OnePlus Nord CE 4 5G">
+  <option value="Moto G64 5G">
+  <option value="Infinix GT 20 Pro">
+  <option value="Nothing Phone 2a">
+  <option value="Google Pixel 9">
+ </datalist>
+
+ <label>RAM</label>
+ <select id="ram">
+  <option value="2">2 GB</option>
+  <option value="3">3 GB</option>
+  <option value="4" selected>4 GB</option>
+  <option value="6">6 GB</option>
+  <option value="8">8 GB</option>
+  <option value="12">12 GB</option>
+  <option value="16">16 GB</option>
+ </select>
+
+ <label>Refresh Rate</label>
+ <select id="refresh">
+  <option value="60">60 Hz</option>
+  <option value="90">90 Hz</option>
+  <option value="120">120 Hz</option>
+  <option value="144">144 Hz</option>
+  <option value="165">165 Hz</option>
+ </select>
+
+ <label>Gyroscope</label>
+ <select id="gyro">
+  <option value="off">OFF</option>
+  <option value="on">ON</option>
+ </select>
+
+ <label>Finger Setup</label>
+ <select id="fingers">
+  <option value="2">2 Fingers</option>
+  <option value="3">3 Fingers</option>
+  <option value="4">4 Fingers</option>
+  <option value="5">5 Fingers</option>
+  <option value="6">6 Fingers</option>
+ </select>
+
+ <label>Gameplay Style</label>
+ <select id="style">
+  <option value="balanced">Balanced</option>
+  <option value="headshot">Headshot</option>
+  <option value="rush">Rush</option>
+ </select>
+
+ <button onclick="generate()">🚀 GENERATE SENSITIVITY</button>
+
+ <div id="loading">
+  <p>⚡ Generating your settings... <span id="progressText">0%</span></p>
+  <div class="progress-bg">
+   <div id="progressBar"></div>
+  </div>
+ </div>
+</div>
+
+<!-- RESULT -->
+
+<div class="card result" id="result">
+ <h2>🔥 YOUR SENSITIVITY</h2>
+ <p id="device" style="color:#aaa"></p>
+ <div id="values"></div>
+ <p style="color:#aaa;font-size:12px">
+ These are starting suggestions, not guaranteed device-specific
+ settings. Adjust and test them in-game according to your comfort.
+ </p>
+ <button onclick="copyResult()">📋 COPY SENSITIVITY</button>
+</div>
 
 <!-- GAMING PROFILE -->
 
@@ -99,32 +311,32 @@ footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
  Fan-made tool. Not affiliated with Garena.
 </footer>
 
-<div style="text-align:center;padding:20px;margin-top:20px;background:#151629;border-top:1px solid #7046d8;">
+<div style="text-align:center;padding:20px;margin-top:20px;background:#151629;border-top:1px solid #7046d8">
+ <h3 style="color:#a78bfa">GSP SENSITIVITY AI</h3>
 
-<h3 style="color:#a78bfa;">GSP SENSITIVITY AI</h3>
+ <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin:15px 0">
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact Us</a>
+  <a href="privacy-policy.html">Privacy Policy</a>
+  <a href="disclaimer.html">Disclaimer</a>
+ </div>
 
-<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin:15px 0;">
-
-<a href="about.html">About Us</a>
-<a href="contact.html">Contact Us</a>
-<a href="privacy-policy.html">Privacy Policy</a>
-<a href="disclaimer.html">Disclaimer</a>
-
+ <p style="color:#888;font-size:12px">
+ © 2026 GSP Sensitivity AI. All Rights Reserved.
+ </p>
+ <a href="https://whatsapp.com/channel/0029VbEVifRLY6d738jAak0k" target="_blank" rel="noopener">
+  Join Our WhatsApp Channel
+ </a>
 </div>
 
-<p style="color:#888;font-size:12px;">
-© 2026 GSP Sensitivity AI. All Rights Reserved.
-</p>
-
-</div>
-  
 <script>
 
 async function generate(){
 
  const phone=document.getElementById("phone").value.trim();
-
  const result=document.getElementById("result");
+ const loading=document.getElementById("loading");
+
  result.style.display="none";
 
  if(!phone){
@@ -132,146 +344,24 @@ async function generate(){
   return;
  }
 
- // Supported mobile models
- 
-const supportedPhones = [
-
- // POCO
- "POCO X7 PRO 5G",
- "POCO X7 5G",
- "POCO F7",
- "POCO F7 Pro",
- "POCO F6",
- "POCO F6 Pro",
- "POCO X6 5G",
- "POCO X6 Pro 5G",
- "POCO M7 5G",
- "POCO M6 5G",
- "POCO M6 Pro",
-
- // Xiaomi / Redmi
- "Redmi Note 14 5G",
- "Redmi Note 14 Pro 5G",
- "Redmi Note 14 Pro Plus 5G",
- "Redmi Note 13 5G",
- "Redmi Note 13 Pro 5G",
- "Redmi Note 13 Pro Plus 5G",
- "Redmi 13 5G",
- "Redmi 14C",
- "Xiaomi 14",
- "Xiaomi 14 Ultra",
-
- // Samsung
- "Samsung Galaxy A06",
- "Samsung Galaxy A15 5G",
- "Samsung Galaxy A16 5G",
- "Samsung Galaxy A25 5G",
- "Samsung Galaxy A26 5G",
- "Samsung Galaxy A35 5G",
- "Samsung Galaxy A36 5G",
- "Samsung Galaxy A55 5G",
- "Samsung Galaxy A56 5G",
- "Samsung Galaxy S24",
- "Samsung Galaxy S24 Ultra",
- "Samsung Galaxy S25",
- "Samsung Galaxy S25 Ultra",
-
- // Realme
- "Realme Narzo 70 5G",
- "Realme Narzo 70 Pro 5G",
- "Realme Narzo 80 Pro 5G",
- "Realme 12 5G",
- "Realme 13 5G",
- "Realme 14 5G",
- "Realme GT 6",
-
- // OPPO
- "OPPO A3x 5G",
- "OPPO A5 5G",
- "OPPO A6 5G",
- "OPPO F27 Pro Plus 5G",
- "OPPO Reno 12 5G",
- "OPPO Reno 13 5G",
-
- // Vivo
- "Vivo T3 5G",
- "Vivo T3x 5G",
- "Vivo T4 5G",
- "Vivo T4x 5G",
- "Vivo V40 5G",
- "Vivo V50 5G",
-
- // iQOO
- "iQOO Z9 5G",
- "iQOO Z9x 5G",
- "iQOO Z10 5G",
- "iQOO Neo 9 Pro",
- "iQOO 12",
-
- // OnePlus
- "OnePlus Nord CE 4 Lite 5G",
- "OnePlus Nord CE 4 5G",
- "OnePlus Nord 4",
- "OnePlus 12",
- "OnePlus 13",
-
- // Motorola
- "Moto G64 5G",
- "Moto G85 5G",
- "Moto G45 5G",
- "Motorola Edge 50 Pro",
- "Motorola Edge 60 Pro",
-
- // Infinix / Tecno
- "Infinix Note 40 5G",
- "Infinix GT 20 Pro",
- "Infinix Hot 50 5G",
- "Tecno Pova 6 Neo 5G",
- "Tecno Pova 6 Pro",
- "Tecno Camon 30",
-
- // Nothing / Google
- "Nothing Phone 2a",
- "Nothing Phone 2a Plus",
- "Nothing Phone 3",
- "Google Pixel 8",
- "Google Pixel 8 Pro",
- "Google Pixel 9",
- "Google Pixel 9 Pro"
-
-];
- function normalize(name){
-  return name.toLowerCase().replace(/[^a-z0-9]/g,"");
- }
-
- const validPhone=supportedPhones.find(
-  model=>normalize(model)===normalize(phone)
- );
-
- if(!validPhone){
-  alert("Phone Not Found! Please enter a supported mobile model.");
-  return;
- }
-const loading = document.getElementById("loading");
-const progressBar = document.getElementById("progressBar");
-const progressText = document.getElementById("progressText");
-
-loading.style.display = "block";
-progressBar.style.width = "0%";
-
-for (let progress = 0; progress <= 100; progress += 5) {
-  progressBar.style.width = progress + "%";
-  progressText.textContent = progress + "%";
-
-  await new Promise(resolve => setTimeout(resolve, 60));
-}
-
-loading.style.display = "none";
  const ram=Number(document.getElementById("ram").value);
  const hz=Number(document.getElementById("refresh").value);
  const gyro=document.getElementById("gyro").value;
  const fingers=Number(document.getElementById("fingers").value);
  const style=document.getElementById("style").value;
+
+ loading.style.display="block";
+
+ const progressBar=document.getElementById("progressBar");
+ const progressText=document.getElementById("progressText");
+
+ for(let progress=0;progress<=100;progress+=5){
+  progressBar.style.width=progress+"%";
+  progressText.textContent=progress+"%";
+  await new Promise(resolve=>setTimeout(resolve,40));
+ }
+
+ loading.style.display="none";
 
  let base=165;
 
@@ -299,25 +389,34 @@ loading.style.display = "none";
  ];
 
  document.getElementById("device").textContent=
- "Device: "+validPhone+" | "+ram+"GB RAM | "+hz+"Hz";
+ "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz";
 
  document.getElementById("values").innerHTML=
  settings.map(([name,value])=>
- `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
+  `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
  ).join("");
 
  result.style.display="block";
+ result.scrollIntoView({behavior:"smooth"});
 }
+
 function copyResult(){
+
  const text=document.getElementById("device").textContent+
  "\n"+Array.from(document.querySelectorAll("#values .value"))
  .map(x=>x.innerText).join("\n");
 
- navigator.clipboard.writeText(text)
- .then(()=>alert("Sensitivity Copied!"))
- .catch(()=>alert("Please copy manually."));
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("Sensitivity Copied!"))
+   .catch(()=>alert("Please copy manually:\n"+text));
+ }else{
+  alert("Please copy manually:\n"+text);
+ }
 }
+
 function createProfile(){
+
  const nickname=document.getElementById("nickname").value.trim();
  const uid=document.getElementById("uid").value.trim();
  const photo=document.getElementById("photo").value.trim();
@@ -341,6 +440,7 @@ function createProfile(){
  avatar.src=photo || "https://placehold.co/200x200/25253a/ffffff?text=GSP";
 
  avatar.onerror=function(){
+  this.onerror=null;
   this.src="https://placehold.co/200x200/25253a/ffffff?text=GSP";
  };
 
@@ -349,30 +449,35 @@ function createProfile(){
 }
 
 function copyProfile(){
+
  const text=
  "GSP GAMING PROFILE\n"+
  "Name: "+document.getElementById("pname").textContent+"\n"+
  document.getElementById("puid").textContent+"\n"+
  "Bio: "+document.getElementById("pbio").textContent;
 
- navigator.clipboard.writeText(text)
- .then(()=>alert("Profile Copied!"))
- .catch(()=>alert("Please copy manually."));
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("Profile Copied!"))
+   .catch(()=>alert("Please copy manually:\n"+text));
+ }else{
+  alert("Please copy manually:\n"+text);
+ }
 }
-  
-function toggleProMode() {
-  document.body.classList.toggle("pro-mode");
 
-  const btn = document.getElementById("proBtn");
+function toggleProMode(){
 
-  if (document.body.classList.contains("pro-mode")) {
-    btn.innerHTML = "🔥 DEACTIVATE PRO MODE";
-  } else {
-    btn.innerHTML = "🔥 ACTIVATE PRO MODE";
-  }
+ document.body.classList.toggle("pro-mode");
+
+ const btn=document.getElementById("proBtn");
+
+ if(document.body.classList.contains("pro-mode")){
+  btn.textContent="🔥 DEACTIVATE PRO MODE";
+ }else{
+  btn.textContent="🔥 ACTIVATE PRO MODE";
+ }
 }
-  
+
 </script>
-
 </body>
 </html>
