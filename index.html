@@ -544,6 +544,19 @@ function copyProfile(){
  .then(()=>alert("Profile Copied!"))
  .catch(()=>alert("Please copy manually."));
 }
+  
+function toggleProMode() {
+  document.body.classList.toggle("pro-mode");
+
+  const btn = document.getElementById("proBtn");
+
+  if (document.body.classList.contains("pro-mode")) {
+    btn.innerHTML = "🔥 DEACTIVATE PRO MODE";
+  } else {
+    btn.innerHTML = "🔥 ACTIVATE PRO MODE";
+  }
+}
+  
 </script>
 
 </body>
