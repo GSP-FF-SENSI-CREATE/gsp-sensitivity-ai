@@ -7,163 +7,78 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
- margin:0;
- padding:16px;
- background:#080914;
- color:white;
- font-family:Arial,sans-serif;
- transition:.3s;
+ margin:0;padding:16px;background:#080914;color:white;
+ font-family:Arial,sans-serif;transition:.3s;
 }
-
 header{text-align:center;padding:22px 0}
 .logo{font-size:28px;font-weight:900;color:#a78bfa}
 .sub{color:#aaa;font-size:12px;letter-spacing:2px}
-
 .card{
- background:#151629;
- border:1px solid #34334f;
- border-radius:16px;
- padding:18px;
- margin:16px 0;
+ background:#151629;border:1px solid #34334f;
+ border-radius:16px;padding:18px;margin:16px 0;
 }
-
 h2{color:#c4b5fd;font-size:19px}
-
-label{
- display:block;
- margin-top:15px;
- color:#ddd;
-}
-
+label{display:block;margin-top:15px;color:#ddd}
 input,select,textarea{
- width:100%;
- padding:13px;
- margin-top:7px;
- border:1px solid #45435f;
- border-radius:9px;
- background:#25253a;
- color:white;
- font-size:15px;
+ width:100%;padding:13px;margin-top:7px;
+ border:1px solid #45435f;border-radius:9px;
+ background:#25253a;color:white;font-size:15px;
 }
-
 textarea{resize:vertical;min-height:75px}
-
 button{
- width:100%;
- padding:15px;
- margin-top:18px;
- border:0;
- border-radius:10px;
+ width:100%;padding:15px;margin-top:18px;
+ border:0;border-radius:10px;
  background:linear-gradient(90deg,#7439df,#a855f7);
- color:white;
- font-weight:bold;
- font-size:16px;
- cursor:pointer;
+ color:white;font-weight:bold;font-size:16px;cursor:pointer;
 }
-
-.secondary{
- background:#292943;
- border:1px solid #6653a5;
-}
-
+.secondary{background:#292943;border:1px solid #6653a5}
 .result{display:none}
-
 .value{
- display:flex;
- justify-content:space-between;
- padding:12px;
- border-bottom:1px solid #34334f;
+ display:flex;justify-content:space-between;
+ padding:12px;border-bottom:1px solid #34334f;
 }
-
 .value strong{color:#c4b5fd}
-
-#loading{
- display:none;
- margin-top:20px;
- text-align:center;
-}
-
+#loading{display:none;margin-top:20px;text-align:center}
 .progress-bg{
- height:12px;
- background:#292943;
- border-radius:20px;
- overflow:hidden;
- margin-top:12px;
+ height:12px;background:#292943;border-radius:20px;
+ overflow:hidden;margin-top:12px;
 }
-
 #progressBar{
- height:100%;
- width:0%;
+ height:100%;width:0%;
  background:linear-gradient(90deg,#7439df,#c084fc);
  transition:width .1s;
 }
-
 .profile{
- display:none;
- text-align:center;
+ display:none;text-align:center;
  background:linear-gradient(145deg,#25204a,#101323);
- border:1px solid #8b5cf6;
- border-radius:18px;
- padding:22px;
- margin-top:20px;
+ border:1px solid #8b5cf6;border-radius:18px;
+ padding:22px;margin-top:20px;
 }
-
 .avatar{
- width:100px;
- height:100px;
- border-radius:50%;
- border:3px solid #a78bfa;
- object-fit:cover;
+ width:100px;height:100px;border-radius:50%;
+ border:3px solid #a78bfa;object-fit:cover;
  background:#25253a;
 }
-
-.pname{
- font-size:23px;
- color:#c4b5fd;
- font-weight:bold;
- margin-top:12px;
-}
-
+.pname{font-size:23px;color:#c4b5fd;font-weight:bold;margin-top:12px}
 .uid{color:#aaa;font-size:13px;margin-top:8px}
 .bio{color:#eee;margin:15px 0;overflow-wrap:anywhere}
 .tag{color:#a78bfa;font-size:12px;letter-spacing:2px}
-
-footer{
- text-align:center;
- color:#888;
- font-size:11px;
- margin:25px 0;
-}
-
-.pro-mode{
- background:#050505;
-}
-
+footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
+a{color:#c4b5fd;text-decoration:none}
+.pro-mode{background:#050505}
 .pro-mode .card{
- background:#111;
- border:1px solid #ffb000;
+ background:#111;border:1px solid #ffb000;
  box-shadow:0 0 15px #ff990033;
 }
-
-.pro-mode h2,
-.pro-mode .logo,
-.pro-mode .value strong{
+.pro-mode h2,.pro-mode .logo,.pro-mode .value strong{
  color:#ffbd35;
 }
-
 .pro-mode button{
  background:linear-gradient(90deg,#a65b00,#ffbd35);
  color:#160d00;
 }
-
-.pro-mode .profile{
- border-color:#ffbd35;
-}
-
-a{color:#c4b5fd;text-decoration:none}
-a:hover{text-decoration:underline}
+.pro-mode .profile{border-color:#ffbd35}
 </style>
 </head>
 
@@ -185,28 +100,11 @@ a:hover{text-decoration:underline}
 <div class="card">
  <h2>🎯 GENERATE SENSITIVITY</h2>
  <p style="color:#aaa;font-size:13px">
- Enter your phone details to get starting sensitivity suggestions.
+ Enter your phone and gaming details.
  </p>
 
  <label>Mobile Model</label>
- <input id="phone" list="phoneList" placeholder="Example: POCO M7 5G">
-
- <datalist id="phoneList">
-  <option value="POCO M7 5G">
-  <option value="POCO X7 PRO 5G">
-  <option value="POCO F6">
-  <option value="Redmi Note 14 5G">
-  <option value="Samsung Galaxy A15 5G">
-  <option value="Realme Narzo 70 5G">
-  <option value="OPPO A3x 5G">
-  <option value="Vivo T3 5G">
-  <option value="iQOO Z9 5G">
-  <option value="OnePlus Nord CE 4 5G">
-  <option value="Moto G64 5G">
-  <option value="Infinix GT 20 Pro">
-  <option value="Nothing Phone 2a">
-  <option value="Google Pixel 9">
- </datalist>
+ <input id="phone" placeholder="Enter any phone model">
 
  <label>RAM</label>
  <select id="ram">
@@ -245,15 +143,15 @@ a:hover{text-decoration:underline}
 
  <label>Gameplay Style</label>
  <select id="style">
+  <option value="headshot" selected>🔥 Headshot</option>
+  <option value="rush">⚡ Rush</option>
   <option value="balanced">Balanced</option>
-  <option value="headshot">Headshot</option>
-  <option value="rush">Rush</option>
  </select>
 
  <button onclick="generate()">🚀 GENERATE SENSITIVITY</button>
 
  <div id="loading">
-  <p>⚡ Generating your settings... <span id="progressText">0%</span></p>
+  <p>⚡ Generating... <span id="progressText">0%</span></p>
   <div class="progress-bg">
    <div id="progressBar"></div>
   </div>
@@ -267,8 +165,8 @@ a:hover{text-decoration:underline}
  <p id="device" style="color:#aaa"></p>
  <div id="values"></div>
  <p style="color:#aaa;font-size:12px">
- These are starting suggestions, not guaranteed device-specific
- settings. Adjust and test them in-game according to your comfort.
+ These are experimental starting suggestions, not verified
+ device-specific settings. Test and adjust them in-game.
  </p>
  <button onclick="copyResult()">📋 COPY SENSITIVITY</button>
 </div>
@@ -324,8 +222,9 @@ a:hover{text-decoration:underline}
  <p style="color:#888;font-size:12px">
  © 2026 GSP Sensitivity AI. All Rights Reserved.
  </p>
+
  <a href="https://whatsapp.com/channel/0029VbEVifRLY6d738jAak0k" target="_blank" rel="noopener">
-  Join Our WhatsApp Channel
+ Join Our WhatsApp Channel
  </a>
 </div>
 
@@ -336,8 +235,6 @@ async function generate(){
  const phone=document.getElementById("phone").value.trim();
  const result=document.getElementById("result");
  const loading=document.getElementById("loading");
-
- result.style.display="none";
 
  if(!phone){
   alert("Please enter your mobile model!");
@@ -350,30 +247,48 @@ async function generate(){
  const fingers=Number(document.getElementById("fingers").value);
  const style=document.getElementById("style").value;
 
+ result.style.display="none";
  loading.style.display="block";
 
  const progressBar=document.getElementById("progressBar");
  const progressText=document.getElementById("progressText");
 
- for(let progress=0;progress<=100;progress+=5){
-  progressBar.style.width=progress+"%";
-  progressText.textContent=progress+"%";
-  await new Promise(resolve=>setTimeout(resolve,40));
+ for(let p=0;p<=100;p+=5){
+  progressBar.style.width=p+"%";
+  progressText.textContent=p+"%";
+  await new Promise(resolve=>setTimeout(resolve,35));
  }
 
  loading.style.display="none";
 
- let base=165;
+ // Different phone names get different base values
+ let phoneHash=0;
 
- if(hz>=120) base+=8;
- else if(hz>=90) base+=4;
+ for(let i=0;i<phone.length;i++){
+  phoneHash=(phoneHash*31+phone.charCodeAt(i))>>>0;
+ }
 
- if(ram>=8) base+=3;
- if(fingers>=4) base+=3;
- if(gyro==="on") base-=5;
+ // New variation on every generation
+ function randomVariation(){
+  return Math.floor(Math.random()*9)-4;
+ }
 
- if(style==="headshot") base+=10;
- if(style==="rush") base+=5;
+ let base=170+(phoneHash%13)+randomVariation();
+
+ // RAM adjustment
+ if(ram<=3) base-=3;
+ else if(ram>=8) base+=2;
+
+ // Refresh rate adjustment
+ if(hz>=120) base+=3;
+ else if(hz>=90) base+=1;
+
+ // Gameplay adjustments
+ if(gyro==="on") base-=3;
+ if(fingers>=4) base+=2;
+
+ if(style==="headshot") base+=6;
+ if(style==="rush") base+=3;
 
  function limit(n){
   return Math.max(0,Math.min(200,Math.round(n)));
@@ -381,15 +296,15 @@ async function generate(){
 
  const settings=[
   ["General",limit(base)],
-  ["Red Dot",limit(base-8)],
-  ["2X Scope",limit(base-20)],
-  ["4X Scope",limit(base-38)],
-  ["Sniper Scope",limit(base-70)],
-  ["Free Look",limit(base-15)]
+  ["Red Dot",limit(base-4+randomVariation())],
+  ["2X Scope",limit(base-15+randomVariation())],
+  ["4X Scope",limit(base-30+randomVariation())],
+  ["Sniper Scope",limit(base-55+randomVariation())],
+  ["Free Look",limit(base-12+randomVariation())]
  ];
 
  document.getElementById("device").textContent=
- "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz";
+ "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz | "+style.toUpperCase();
 
  document.getElementById("values").innerHTML=
  settings.map(([name,value])=>
@@ -480,4 +395,5 @@ function toggleProMode(){
 
 </script>
 </body>
-</html>
+ </html>
+ 
