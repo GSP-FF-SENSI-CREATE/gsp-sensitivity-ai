@@ -282,10 +282,56 @@ footer{text-align:center;color:#888;font-size:11px;margin:25px 0}
 </footer>
 
 <script>
+
 function generate(){
+
  const phone=document.getElementById("phone").value.trim();
+
+ const result=document.getElementById("result");
+ result.style.display="none";
+
  if(!phone){
   alert("Please enter your mobile model!");
+  return;
+ }
+
+ // Supported mobile models
+ const supportedPhones = [
+  "POCO M7 5G",
+  "POCO X6 5G",
+  "POCO X6 Pro 5G",
+  "POCO M6 5G",
+  "Redmi Note 13 5G",
+  "Redmi Note 13 Pro 5G",
+  "Redmi 13 5G",
+  "Samsung Galaxy A15 5G",
+  "Samsung Galaxy A16 5G",
+  "Samsung Galaxy M15 5G",
+  "Realme Narzo 70 5G",
+  "Realme Narzo 70 Pro 5G",
+  "Realme 12 5G",
+  "iQOO Z9 5G",
+  "iQOO Z9x 5G",
+  "Vivo T3x 5G",
+  "Vivo T3 5G",
+  "OnePlus Nord CE4 Lite 5G",
+  "OnePlus Nord CE 4 5G",
+  "Moto G64 5G",
+  "Moto G85 5G",
+  "Infinix Note 40 5G",
+  "Tecno Pova 6 Neo 5G"
+ ];
+
+ function normalize(name){
+  return name.toLowerCase().replace(/[^a-z0-9]/g,"");
+ }
+
+ const validPhone=supportedPhones.find(
+  model=>normalize(model)===normalize(phone)
+ );
+
+ if(!validPhone){
+  alert("Phone Not Found! Please enter a supported mobile model.");
   return;
  }
 
@@ -321,16 +367,15 @@ function generate(){
  ];
 
  document.getElementById("device").textContent=
- "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz";
+ "Device: "+validPhone+" | "+ram+"GB RAM | "+hz+"Hz";
 
  document.getElementById("values").innerHTML=
  settings.map(([name,value])=>
-  `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
+ `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
  ).join("");
 
- document.getElementById("result").style.display="block";
+ result.style.display="block";
 }
-
 function copyResult(){
  const text=document.getElementById("device").textContent+
  "\n"+Array.from(document.querySelectorAll("#values .value"))
@@ -340,7 +385,6 @@ function copyResult(){
  .then(()=>alert("Sensitivity Copied!"))
  .catch(()=>alert("Please copy manually."));
 }
-
 function createProfile(){
  const nickname=document.getElementById("nickname").value.trim();
  const uid=document.getElementById("uid").value.trim();
