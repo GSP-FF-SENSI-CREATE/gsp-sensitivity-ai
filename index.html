@@ -344,8 +344,7 @@ if(!matchedPhone){
  ];
 
  document.getElementById("device").textContent=
- "Device: "+(matchedPhone.marketName || matchedPhone.name?.long || matchedPhone.model || phone)+" | "+ram+"GB RAM | "+hz+"Hz | "+style.toUpperCase();
-
+ "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz | "+style.toUpperCase();
  document.getElementById("values").innerHTML=
  settings.map(([name,value])=>
   `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
