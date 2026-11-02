@@ -315,31 +315,113 @@ function generate(){
  }
 
  // Supported mobile models
- const supportedPhones = [
-  "POCO M7 5G",
-  "POCO X6 5G",
-  "POCO X6 Pro 5G",
-  "POCO M6 5G",
-  "Redmi Note 13 5G",
-  "Redmi Note 13 Pro 5G",
-  "Redmi 13 5G",
-  "Samsung Galaxy A15 5G",
-  "Samsung Galaxy A16 5G",
-  "Samsung Galaxy M15 5G",
-  "Realme Narzo 70 5G",
-  "Realme Narzo 70 Pro 5G",
-  "Realme 12 5G",
-  "iQOO Z9 5G",
-  "iQOO Z9x 5G",
-  "Vivo T3x 5G",
-  "Vivo T3 5G",
-  "OnePlus Nord CE4 Lite 5G",
-  "OnePlus Nord CE 4 5G",
-  "Moto G64 5G",
-  "Moto G85 5G",
-  "Infinix Note 40 5G",
-  "Tecno Pova 6 Neo 5G"
- ];
+ 
+const supportedPhones = [
+
+ // POCO
+ "POCO X7 PRO 5G",
+ "POCO X7 5G",
+ "POCO F7",
+ "POCO F7 Pro",
+ "POCO F6",
+ "POCO F6 Pro",
+ "POCO X6 5G",
+ "POCO X6 Pro 5G",
+ "POCO M7 5G",
+ "POCO M6 5G",
+ "POCO M6 Pro",
+
+ // Xiaomi / Redmi
+ "Redmi Note 14 5G",
+ "Redmi Note 14 Pro 5G",
+ "Redmi Note 14 Pro Plus 5G",
+ "Redmi Note 13 5G",
+ "Redmi Note 13 Pro 5G",
+ "Redmi Note 13 Pro Plus 5G",
+ "Redmi 13 5G",
+ "Redmi 14C",
+ "Xiaomi 14",
+ "Xiaomi 14 Ultra",
+
+ // Samsung
+ "Samsung Galaxy A06",
+ "Samsung Galaxy A15 5G",
+ "Samsung Galaxy A16 5G",
+ "Samsung Galaxy A25 5G",
+ "Samsung Galaxy A26 5G",
+ "Samsung Galaxy A35 5G",
+ "Samsung Galaxy A36 5G",
+ "Samsung Galaxy A55 5G",
+ "Samsung Galaxy A56 5G",
+ "Samsung Galaxy S24",
+ "Samsung Galaxy S24 Ultra",
+ "Samsung Galaxy S25",
+ "Samsung Galaxy S25 Ultra",
+
+ // Realme
+ "Realme Narzo 70 5G",
+ "Realme Narzo 70 Pro 5G",
+ "Realme Narzo 80 Pro 5G",
+ "Realme 12 5G",
+ "Realme 13 5G",
+ "Realme 14 5G",
+ "Realme GT 6",
+
+ // OPPO
+ "OPPO A3x 5G",
+ "OPPO A5 5G",
+ "OPPO A6 5G",
+ "OPPO F27 Pro Plus 5G",
+ "OPPO Reno 12 5G",
+ "OPPO Reno 13 5G",
+
+ // Vivo
+ "Vivo T3 5G",
+ "Vivo T3x 5G",
+ "Vivo T4 5G",
+ "Vivo T4x 5G",
+ "Vivo V40 5G",
+ "Vivo V50 5G",
+
+ // iQOO
+ "iQOO Z9 5G",
+ "iQOO Z9x 5G",
+ "iQOO Z10 5G",
+ "iQOO Neo 9 Pro",
+ "iQOO 12",
+
+ // OnePlus
+ "OnePlus Nord CE 4 Lite 5G",
+ "OnePlus Nord CE 4 5G",
+ "OnePlus Nord 4",
+ "OnePlus 12",
+ "OnePlus 13",
+
+ // Motorola
+ "Moto G64 5G",
+ "Moto G85 5G",
+ "Moto G45 5G",
+ "Motorola Edge 50 Pro",
+ "Motorola Edge 60 Pro",
+
+ // Infinix / Tecno
+ "Infinix Note 40 5G",
+ "Infinix GT 20 Pro",
+ "Infinix Hot 50 5G",
+ "Tecno Pova 6 Neo 5G",
+ "Tecno Pova 6 Pro",
+ "Tecno Camon 30",
+
+ // Nothing / Google
+ "Nothing Phone 2a",
+ "Nothing Phone 2a Plus",
+ "Nothing Phone 3",
+ "Google Pixel 8",
+ "Google Pixel 8 Pro",
+ "Google Pixel 9",
+ "Google Pixel 9 Pro"
+
+];
 
  function normalize(name){
   return name.toLowerCase().replace(/[^a-z0-9]/g,"");
