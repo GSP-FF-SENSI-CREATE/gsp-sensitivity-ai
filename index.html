@@ -423,6 +423,14 @@ const supportedPhones = [
 
 ];
 
+const phoneList = document.getElementById("phoneList");
+
+supportedPhones.forEach(function(model) {
+  const option = document.createElement("option");
+  option.value = model;
+  phoneList.appendChild(option);
+});
+  
  function normalize(name){
   return name.toLowerCase().replace(/[^a-z0-9]/g,"");
  }
