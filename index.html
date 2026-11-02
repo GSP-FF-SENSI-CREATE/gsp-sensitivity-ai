@@ -266,20 +266,15 @@ async function checkAndroidPhone(phone){
 }
  
 async function generate(){
-
  const phone=document.getElementById("phone").value.trim();
-
-if(!matchedPhone){
- alert("Phone Not Found! Please enter a valid Android phone model.");
- return;
-}
- const result=document.getElementById("result");
- const loading=document.getElementById("loading");
 
  if(!phone){
   alert("Please enter your mobile model!");
   return;
  }
+
+ const result=document.getElementById("result");
+ const loading=document.getElementById("loading");
 
  const ram=Number(document.getElementById("ram").value);
  const hz=Number(document.getElementById("refresh").value);
