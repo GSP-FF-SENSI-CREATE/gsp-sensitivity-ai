@@ -84,6 +84,57 @@ a{color:#c4b5fd;text-decoration:none}
 
 <body>
 
+<style>
+.gsp-yt-banner {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 28px 12px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #090018, #19002f, #050510);
+  border: 2px solid #a855f7;
+  border-radius: 18px;
+  box-shadow: 0 0 15px #9333ea,
+              0 0 30px #7e22ce,
+              inset 0 0 18px #581c87;
+}
+
+.gsp-yt-name {
+  font-size: clamp(30px, 7vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #fff,
+               0 0 18px #a855f7,
+               0 0 35px #9333ea;
+  margin: 0 0 14px;
+}
+
+.gsp-yt-subscribe {
+  display: inline-block;
+  font-size: clamp(18px, 4vw, 27px);
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(90deg, #ff0033, #d000ff);
+  padding: 12px 22px;
+  border-radius: 10px;
+  text-shadow: 0 0 10px #fff;
+  box-shadow: 0 0 12px #ff0033,
+              0 0 25px #d000ff;
+  animation: gspGlow 1.5s infinite alternate;
+}
+
+@keyframes gspGlow {
+  from { box-shadow: 0 0 10px #ff0033, 0 0 18px #d000ff; }
+  to { box-shadow: 0 0 22px #ff0033, 0 0 38px #d000ff; }
+}
+</style>
+
+<div class="gsp-yt-banner">
+  <div class="gsp-yt-name">YT - GSPvortex</div>
+  <div class="gsp-yt-subscribe">▶ SUBSCRIBE MY CHANNEL</div>
+</div>
+ 
 <header>
  <div class="logo">🔥 GSP SENSITIVITY AI</div>
  <div class="sub">SMART GAMING SENSITIVITY GENERATOR</div>
