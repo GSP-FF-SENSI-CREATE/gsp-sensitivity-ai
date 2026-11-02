@@ -104,7 +104,7 @@ a{color:#c4b5fd;text-decoration:none}
  </p>
 
  <label>Mobile Model</label>
- <input id="phone" placeholder="Enter any phone model">
+ <input id="phone" placeholder="Enter your phone model">
 
  <label>RAM</label>
  <select id="ram">
@@ -234,38 +234,46 @@ let androidDeviceDatabase = null;
 
 async function checkAndroidPhone(phone){
 
- try{
-  if(!androidDeviceDatabase){
-   const response = await fetch(
-    "https://cdn.jsdelivr.net/gh/DeviceFarmer/stf-device-db@master/dist/devices.json"
-   );
+ if(!androidDeviceDatabase){
 
-   if(!response.ok) throw new Error("Database unavailable");
+  const response = await fetch(
+   "https://cdn.jsdelivr.net/gh/DeviceFarmer/stf-device-db@master/dist/devices.json"
+  );
 
-   androidDeviceDatabase = await response.json();
+  if(!response.ok){
+   throw new Error("Database unavailable");
   }
 
-  const normalize = value =>
-   String(value || "").toLowerCase().replace(/[^a-z0-9]/g,"");
-
-  const search = normalize(phone);
-  const devices = Array.isArray(androidDeviceDatabase)
-   ? androidDeviceDatabase
-   : Object.values(androidDeviceDatabase);
-
-  return devices.find(device =>
-   normalize(device.marketName) === search ||
-   normalize(device.name?.long) === search ||
-   normalize(device.model) === search
-  ) || null;
-
- }catch(error){
-  alert("Phone database load nahi ho paya. Internet check karke dobara try karo.");
-  return null;
+  androidDeviceDatabase = await response.json();
  }
+
+ const normalize = value =>
+  String(value || "").toLowerCase().replace(/[^a-z0-9]/g,"");
+
+ const search = normalize(phone);
+
+ const models = androidDeviceDatabase.models;
+
+ if(!models || typeof models !== "object"){
+  throw new Error("Invalid database");
+ }
+
+ const matched = Object.values(models).find(device => {
+
+  const brand = normalize(device.b);
+  const model = normalize(device.m);
+
+  return (
+   model === search ||
+   normalize(brand + " " + device.m) === search
+  );
+ });
+
+ return matched || null;
 }
- 
+
 async function generate(){
+
  const phone=document.getElementById("phone").value.trim();
 
  if(!phone){
@@ -276,14 +284,32 @@ async function generate(){
  const result=document.getElementById("result");
  const loading=document.getElementById("loading");
 
+ // PHONE VALIDATION
+
+ loading.style.display="block";
+ result.style.display="none";
+
+ let matchedPhone;
+
+ try{
+  matchedPhone=await checkAndroidPhone(phone);
+ }catch(error){
+  loading.style.display="none";
+  alert("Phone database load nahi hua. Internet check karke dobara try karo.");
+  return;
+ }
+
+ if(!matchedPhone){
+  loading.style.display="none";
+  alert("Phone Not Found! Please enter the correct phone model.");
+  return;
+ }
+
  const ram=Number(document.getElementById("ram").value);
  const hz=Number(document.getElementById("refresh").value);
  const gyro=document.getElementById("gyro").value;
  const fingers=Number(document.getElementById("fingers").value);
  const style=document.getElementById("style").value;
-
- result.style.display="none";
- loading.style.display="block";
 
  const progressBar=document.getElementById("progressBar");
  const progressText=document.getElementById("progressText");
@@ -296,29 +322,32 @@ async function generate(){
 
  loading.style.display="none";
 
- // Different phone names get different base values
+ // DIFFERENT PHONE NAMES GET DIFFERENT BASE VALUES
+
  let phoneHash=0;
 
  for(let i=0;i<phone.length;i++){
   phoneHash=(phoneHash*31+phone.charCodeAt(i))>>>0;
  }
 
- // New variation on every generation
  function randomVariation(){
   return Math.floor(Math.random()*9)-4;
  }
 
  let base=170+(phoneHash%13)+randomVariation();
 
- // RAM adjustment
+ // RAM ADJUSTMENT
+
  if(ram<=3) base-=3;
  else if(ram>=8) base+=2;
 
- // Refresh rate adjustment
+ // REFRESH RATE ADJUSTMENT
+
  if(hz>=120) base+=3;
  else if(hz>=90) base+=1;
 
- // Gameplay adjustments
+ // GAMEPLAY ADJUSTMENTS
+
  if(gyro==="on") base-=3;
  if(fingers>=4) base+=2;
 
@@ -339,7 +368,9 @@ async function generate(){
  ];
 
  document.getElementById("device").textContent=
- "Device: "+phone+" | "+ram+"GB RAM | "+hz+"Hz | "+style.toUpperCase();
+ "Device: "+matchedPhone.b+" "+matchedPhone.m+
+ " | "+ram+"GB RAM | "+hz+"Hz | "+style.toUpperCase();
+
  document.getElementById("values").innerHTML=
  settings.map(([name,value])=>
   `<div class="value"><span>${name}</span><strong>${value}</strong></div>`
@@ -429,5 +460,5 @@ function toggleProMode(){
 
 </script>
 </body>
- </html>
- 
+                          </html>
+                          
